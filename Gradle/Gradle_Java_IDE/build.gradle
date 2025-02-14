@@ -1,0 +1,33 @@
+plugins {
+    id("java")
+    id("application")
+}
+
+group = "com.choucair"
+version = "1.0-SNAPSHOT"
+
+application {
+    mainClass = "com.choucair.Main"
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://artifactory.bancolombia.corp:80/maven-bancolombia/"
+        allowInsecureProtocol = true
+    }
+}
+
+dependencies {
+    implementation("net.serenity-bdd:serenity-core:1.9.14")
+    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+tasks.register("aggregate") { // 🔹 Definir la tarea aggregate para generar reportes
+    dependsOn "test"
+}

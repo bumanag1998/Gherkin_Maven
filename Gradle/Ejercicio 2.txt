@@ -1,0 +1,10 @@
+1. ¿Por qué se puede ejecutar gradle test si no hay una tarea con ese nombre?
+Gradle permite ejecutar gradle test porque el plugin de Java (id("java")) aplica automáticamente la tarea test.
+El plugin de Java crea una tarea llamada test, que ejecuta las pruebas unitarias con JUnit o cualquier otro framework de pruebas configurado.
+Al declarar tasks.test { useJUnitPlatform() }, se le indica a Gradle que use JUnit 5 para ejecutar las pruebas.
+Esto significa que aunque no hayas declarado test explícitamente en build.gradle, la tarea ya está disponible gracias al plugin de Java.
+
+2. ¿Por qué se puede ejecutar gradle clean si no hay una tarea con ese nombre?
+Gradle permite ejecutar gradle clean porque el plugin base incluye una tarea llamada clean.
+Cuando usas el plugin de Java (id("java")), este aplica automáticamente el plugin base, el cual agrega la tarea clean.
+clean elimina la carpeta build/, lo que limpia los archivos generados en compilaciones anteriores.
